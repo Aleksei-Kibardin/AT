@@ -1,26 +1,85 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <header>
+      <div class="wrap-nav">
+        <img src="./assets/logo.png" alt="logo" class="logo" />
+        <div class="btns-header">
+          <router-link to="/form">Форма</router-link>
+          <router-link to="/preview">Превью</router-link>
+        </div>
+      </div>
+    </header>
+    <main class="content">
+      <router-view></router-view>
+    </main>
+    <footer>
+      <span class="foot-txt">all rights reserved</span>
+    </footer>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+<script setup></script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+* {
+  font-family: "Montserrat";
+  font-style: normal;
+}
+a {
+  text-decoration: none;
+  color: rgba(17, 17, 17, 0.48);
+}
+body {
+  max-width: 1366px;
+  margin: auto;
+}
+header {
+  display: flex;
+  height: 76px;
+  box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
+}
+.wrap-nav {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  width: 792px;
+  align-self: center;
+}
+.logo {
+  width: 93px;
+  height: 29px;
+  margin-left: 12%;
+}
+.btns-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.content {
+  height: 616px;
+  display: flex;
+  justify-content: center;
+}
+footer {
+  display: flex;
+  height: 76px;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa;
+  box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
+}
+.foot-txt {
+  font-size: 13px;
+}
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.message {
+  font-size: 14px;
+  position: absolute;
+  color: red;
 }
 </style>
