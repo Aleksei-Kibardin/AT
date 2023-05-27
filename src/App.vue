@@ -98,7 +98,7 @@ footer {
 .wrap-link::after {
   content: attr(data-tooltip);
   position: absolute;
-  width: 300px;
+  width: 220px;
   left: 0;
   top: 0;
   background: #c93939;
