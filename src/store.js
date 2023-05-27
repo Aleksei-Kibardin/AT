@@ -8,6 +8,7 @@ const store = createStore({
             age: null
         },
         chaild: [],
+        active: false
       }
     },
   })

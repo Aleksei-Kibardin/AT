@@ -5,7 +5,9 @@
         <img src="./assets/logo.png" alt="logo" class="logo" />
         <div class="btns-header">
           <router-link to="/form">Форма</router-link>
-          <router-link to="/preview">Превью</router-link>
+          <router-link :class="{ 'disabled': !$store.state.active }" to="/preview"
+            >Превью</router-link
+          >
         </div>
       </div>
     </header>
@@ -18,7 +20,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
@@ -77,9 +80,9 @@ footer {
   opacity: 0.5;
   pointer-events: none;
 }
-.message {
+.message{
   font-size: 14px;
   position: absolute;
-  color: red;
+ color: red;
 }
 </style>

@@ -3,7 +3,7 @@
     <div class="user-preview">
       <h5 class="title user-title">Персональные данные</h5>
       <p class="user">
-        {{ $store.state.user.name }}, {{ $store.state.user.age }} Лет
+        {{ $store.state.user.name }}, {{ $store.state.user.age }} лет
       </p>
       <div class="chaild-preview">
         <h5 class="title chaild-title">Дети</h5>
@@ -15,7 +15,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+
+</script>
 
 <style>
 .preview {

@@ -4,7 +4,7 @@
       <h5 class="title user-title">Персональные данные</h5>
       <div class="entry-field">
         <input
-          @change="validationName(user.name)"
+          @change="validationName(user)"
           v-model="user.name"
           class="input"
           placeholder=" "
@@ -13,7 +13,7 @@
       </div>
       <div class="entry-field">
         <input
-          @change="validationAge(user.age)"
+          @change="validationAge(user)"
           v-model="user.age"
           class="input"
           placeholder=" "
@@ -25,7 +25,7 @@
       <div class="chaild-head">
         <h5 class="title chaild-title">Дети (макс. 5)</h5>
         <button
-          v-if="$store.state.chaild.length < 5"
+          v-if="chaild.length < 5"
           @click="addChaildCards()"
           class="btn-add"
         >
@@ -36,7 +36,7 @@
       <div v-for="t in chaild" :key="t" class="chaild-form">
         <div class="entry-field">
           <input
-            @change="validationName(t.name)"
+            @change="validationName(t)"
             v-model="t.name"
             class="input"
             placeholder=" "
@@ -45,7 +45,7 @@
         </div>
         <div class="entry-field">
           <input
-            @change="validationAge(t.age)"
+            @change="validationAge(t)"
             v-model="t.age"
             class="input"
             placeholder=" "
@@ -65,9 +65,9 @@ import { ref } from "vue";
 
 const chaild = ref([]);
 const user = ref({
-            name: null,
-            age: null
-        });
+  name: null,
+  age: null,
+});
 
 const addChaildCards = () => {
   if (chaild.value.length < 5) {
@@ -87,31 +87,59 @@ const chaildRemove = (t) => {
 
 const validationName = (i) => {
   const regexp = /\d/g;
-  if (i.length < 2) {
+  if (i.name.length < 2) {
     alert("Имя должно состоять больее чем из 2х символов");
-  } else if (i.length > 15) {
+    i.name = null;
+    store.state.active = false;
+  } else if (i.name.length > 15) {
     alert("Имя должно состоять менее чем из 15 символов");
-  } else if (i.match(regexp)) {
+    i.name = null;
+    store.state.active = false;
+  } else if (i.name.match(regexp)) {
     alert("Имя должно состоять из букв");
+    i.name = null;
+    store.state.active = false;
   }
+  return i.name;
 };
 const validationAge = (i) => {
   const regexp = /\D/g;
-  if (i > 130) {
+  if (i.age > 130) {
     alert("укажите настоящий возрат, он должен быть менее 130");
-  } else if (i.match(regexp)) {
-    console.log(i.match(regexp));
+    i.age = null;
+    store.state.active = false;
+  } else if (i.age.match(regexp)) {
     alert("возраст должен содержать только цифры");
-  } else if (i < 0) {
+    i.age = null;
+    store.state.active = false;
+  } else if (i.age < 0) {
     alert("возраст не может быть отрицательным");
-  } else {
-    store.state.active = true;
+    i.age = null;
+    store.state.active = false;
+  }
+  return i.age;
+};
+
+const checkNull = (i) => {
+  for (var key in i) {
+    if (key !== "id") {
+      if (i[key] !== null && i[key] !== "") {
+        store.state.active = true;
+      } else {
+        store.state.active = false;
+        break
+      }
+    }
   }
 };
 const save = () => {
-  store.state.user = user.value
-  store.state.chaild = chaild.value
-}
+  checkNull(user.value);
+  chaild.value.forEach((i) => {
+    checkNull(i);
+  });
+  store.state.user = user.value;
+  store.state.chaild = chaild.value;
+};
 </script>
 
 <style>
