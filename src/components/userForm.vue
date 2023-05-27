@@ -63,26 +63,26 @@
 import store from "../store";
 import { ref } from "vue";
 
-const chaild = ref([]);
+const chaild = ref([]); // создаем масив с обьектом чтобы передать потом в стейт тк в противном случае в превью будет реактивные данные и смысла от кнопки "сохронить" не будет
 const user = ref({
   name: null,
   age: null,
 });
 
-const addChaildCards = () => {
+const addChaildCards = () => {    // создаем карточки для заполнения формы с детьми и сразу делаем проверку на максимальное значение
   if (chaild.value.length < 5) {
     chaild.value.push({
       name: null,
       age: null,
-      id: Math.floor(Math.random() * 101),
+      id: Math.floor(Math.random() * 1001), // создаем рандомный id для новой карточки, я решил не заморачиваться и просто рандомные числа
     });
   }
 };
 
-const chaildRemove = (t) => {
+const chaildRemove = (t) => { 
   chaild.value = chaild.value.filter((i) => {
     return i !== t;
-  });
+  }); // удаляем карточки по id
 };
 
 const validationName = (i) => {
@@ -120,7 +120,7 @@ const validationAge = (i) => {
   return i.age;
 };
 
-const checkNull = (i) => {
+const checkNull = (i) => { // проверяем на null чтобы активировать кнопку превью     store.state.active равное true активирует кнопку по умолчанию стоит лож
   for (var key in i) {
     if (key !== "id") {
       if (i[key] !== null && i[key] !== "") {
@@ -138,7 +138,7 @@ const save = () => {
     checkNull(i);
   });
   store.state.user = user.value;
-  store.state.chaild = chaild.value;
+  store.state.chaild = chaild.value; // передаем данные в стейт 
 };
 </script>
 
