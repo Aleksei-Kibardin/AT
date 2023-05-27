@@ -63,30 +63,30 @@
 import store from "../store";
 import { ref } from "vue";
 
-const chaild = ref([]); // создаем масив с обьектом чтобы передать потом в стейт тк в противном случае в превью будет реактивные данные и смысла от кнопки "сохронить" не будет
+const chaild = ref([]);                                   // создаем масив с обьектом чтобы передать потом в стейт тк в противном случае в превью будет реактивные данные и смысла от кнопки "сохронить" не будет
 const user = ref({
   name: null,
   age: null,
 });
 
-const addChaildCards = () => {    // создаем карточки для заполнения формы с детьми и сразу делаем проверку на максимальное значение
+const addChaildCards = () => {                               // создаем карточки для заполнения формы с детьми и сразу делаем проверку на максимальное значение
   if (chaild.value.length < 5) {
     chaild.value.push({
       name: null,
       age: null,
-      id: Math.floor(Math.random() * 1001), // создаем рандомный id для новой карточки, я решил не заморачиваться и просто рандомные числа
+      id: Math.floor(Math.random() * 1001),                   // создаем рандомный id для новой карточки, я решил не заморачиваться и просто рандомные числа
     });
   }
 };
-
-const chaildRemove = (t) => { 
+                                        
+const chaildRemove = (t) => {                                     // удаляем карточки по id
   chaild.value = chaild.value.filter((i) => {
     return i !== t;
-  }); // удаляем карточки по id
+  }); 
 };
 
 const validationName = (i) => {
-  const regexp = /\d/g;
+  const regexp = /\d/g;                                           // валидация по имяни
   if (i.name.length < 2) {
     alert("Имя должно состоять больее чем из 2х символов");
     i.name = null;
@@ -102,8 +102,9 @@ const validationName = (i) => {
   }
   return i.name;
 };
+
 const validationAge = (i) => {
-  const regexp = /\D/g;
+  const regexp = /\D/g;                                        // валидация по возрасту
   if (i.age > 130) {
     alert("укажите настоящий возрат, он должен быть менее 130");
     i.age = null;
@@ -120,7 +121,7 @@ const validationAge = (i) => {
   return i.age;
 };
 
-const checkNull = (i) => { // проверяем на null чтобы активировать кнопку превью     store.state.active равное true активирует кнопку по умолчанию стоит лож
+const checkNull = (i) => {                                    // проверяем на null чтобы активировать кнопку превью     store.state.active равное true активирует кнопку по умолчанию стоит лож
   for (var key in i) {
     if (key !== "id") {
       if (i[key] !== null && i[key] !== "") {
@@ -138,7 +139,7 @@ const save = () => {
     checkNull(i);
   });
   store.state.user = user.value;
-  store.state.chaild = chaild.value; // передаем данные в стейт 
+  store.state.chaild = chaild.value;                                  // передаем данные в стейт 
 };
 </script>
 
