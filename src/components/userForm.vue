@@ -138,6 +138,9 @@ const save = () => {
   chaild.value.forEach((i) => {
     checkNull(i);
   });
+  if (store.state.active === true) {
+    alert("Данные успешно сохранены")
+  }
   store.state.user = user.value;
   store.state.chaild = chaild.value;                                  // передаем данные в стейт 
 };
