@@ -101,7 +101,7 @@ footer {
   width: 300px;
   left: 0;
   top: 0;
-  background: #3989c9;
+  background: #c93939;
   color: #fff;
   padding: 0.5em;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
