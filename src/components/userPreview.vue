@@ -6,7 +6,7 @@
         {{ $store.state.user.name }}, {{ $store.state.user.age }} лет
       </p>
       <div class="chaild-preview">
-        <h5 class="title chaild-title">Дети</h5>
+        <h5 v-if="chaildCheck" class="title chaild-title">Дети</h5>
         <div v-for="t in $store.state.chaild" :key="t" class="chaild-card">
           {{ t.name }}, {{ t.age }} Лет
         </div>
@@ -16,6 +16,9 @@
 </template>
 
 <script setup>
+import store from "../store";
+
+  const chaildCheck = (store.state.chaild.length > 0) ? true : false
 
 </script>
 

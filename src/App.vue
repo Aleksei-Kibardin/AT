@@ -87,11 +87,6 @@ footer {
   opacity: 0.5;
   pointer-events: none;
 }
-.message {
-  font-size: 14px;
-  position: absolute;
-  color: red;
-}
 .wrap-link {
   position: relative;
 }
@@ -112,5 +107,8 @@ footer {
 .wrap-link:hover::after {
   opacity: 1;
   top: 2em;
+}
+.message{
+  margin: 0%;
 }
 </style>

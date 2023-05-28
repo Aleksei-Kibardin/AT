@@ -7,6 +7,7 @@
           @change="validationName(user)"
           v-model="user.name"
           class="input"
+          required
           placeholder=" "
         />
         <label class="label">Имя</label>
@@ -16,6 +17,7 @@
           @change="validationAge(user)"
           v-model="user.age"
           class="input"
+          required
           placeholder=" "
         />
         <label class="label">Возраст</label>
@@ -39,6 +41,7 @@
             @change="validationName(t)"
             v-model="t.name"
             class="input"
+            required
             placeholder=" "
           />
           <label class="label">Имя</label>
@@ -48,6 +51,7 @@
             @change="validationAge(t)"
             v-model="t.age"
             class="input"
+            required
             placeholder=" "
           />
           <label class="label">Возраст</label>
@@ -63,30 +67,32 @@
 import store from "../store";
 import { ref } from "vue";
 
-const chaild = ref([]);                                   // создаем масив с обьектом чтобы передать потом в стейт тк в противном случае в превью будет реактивные данные и смысла от кнопки "сохронить" не будет
+const chaild = ref([]); // создаем масив с обьектом чтобы передать потом в стейт тк в противном случае в превью будет реактивные данные и смысла от кнопки "сохронить" не будет
 const user = ref({
   name: null,
   age: null,
 });
 
-const addChaildCards = () => {                               // создаем карточки для заполнения формы с детьми и сразу делаем проверку на максимальное значение
+const addChaildCards = () => {
+  // создаем карточки для заполнения формы с детьми и сразу делаем проверку на максимальное значение
   if (chaild.value.length < 5) {
     chaild.value.push({
       name: null,
       age: null,
-      id: Math.floor(Math.random() * 1001),                   // создаем рандомный id для новой карточки, я решил не заморачиваться и просто рандомные числа
+      id: Math.floor(Math.random() * 1001), // создаем рандомный id для новой карточки, я решил не заморачиваться и просто рандомные числа
     });
   }
 };
-                                        
-const chaildRemove = (t) => {                                     // удаляем карточки по id
+
+const chaildRemove = (t) => {
+  // удаляем карточки по id
   chaild.value = chaild.value.filter((i) => {
     return i !== t;
-  }); 
+  });
 };
 
 const validationName = (i) => {
-  const regexp = /\d/g;                                           // валидация по имяни
+  const regexp = /\d/g; // валидация по имяни
   if (i.name.length < 2) {
     alert("Имя должно состоять больее чем из 2х символов");
     i.name = null;
@@ -104,7 +110,7 @@ const validationName = (i) => {
 };
 
 const validationAge = (i) => {
-  const regexp = /\D/g;                                        // валидация по возрасту
+  const regexp = /\D/g; // валидация по возрасту
   if (i.age > 130) {
     alert("укажите настоящий возрат, он должен быть менее 130");
     i.age = null;
@@ -121,15 +127,14 @@ const validationAge = (i) => {
   return i.age;
 };
 
-const checkNull = (i) => {                                    // проверяем на null чтобы активировать кнопку превью     store.state.active равное true активирует кнопку по умолчанию стоит лож
+const checkNull = (i) => {
+  // проверяем на null чтобы активировать кнопку превью     store.state.active равное true активирует кнопку по умолчанию стоит лож
   for (var key in i) {
-    if (key !== "id") {
-      if (i[key] !== null && i[key] !== "") {
-        store.state.active = true;
-      } else {
-        store.state.active = false;
-        break
-      }
+    if (i[key] !== null && i[key] !== "") {
+      store.state.active = true;
+    } else {
+      store.state.active = false;
+      break;
     }
   }
 };
@@ -139,10 +144,13 @@ const save = () => {
     checkNull(i);
   });
   if (store.state.active === true) {
-    alert("Данные успешно сохранены")
+    alert("Данные успешно сохранены");
   }
+  localStorage.setItem(user.value);
+  localStorage.setItem(chaild.value);
+
   store.state.user = user.value;
-  store.state.chaild = chaild.value;                                  // передаем данные в стейт 
+  store.state.chaild = chaild.value; // передаем данные в стейт
 };
 </script>
 
@@ -275,4 +283,5 @@ button {
   font-size: 14px;
   color: #fff;
 }
+
 </style>
