@@ -1,5 +1,7 @@
 # alef-test
 
+чтобы не отходить от изначального дизайна я применил полумеры в виде alert
+
 ## Project setup
 ```
 npm install
